@@ -53,7 +53,8 @@ class Htp1:
                                     channel_filter = slot[tokens[4]]
                                     if tokens[5] in channel_filter:
                                         channel_filter[tokens[5]] = operation['value']
-                                        print(f"Updated slot {tokens[4]} channel {tokens[5]} to {channel_filter}")
+                                        print(f"Updated slot {tokens[2]}/{tokens[4]} to {channel_filter}")
+                                        handled = True
 
                     if not handled:
                         print(f"Unable to handle {operation}")
@@ -61,7 +62,7 @@ class Htp1:
                 pass # nop
             else:
                 print(f"Ignoring {path} {data}")
-            await websocket.send(json.dumps(self.__bands))
+            await websocket.send(f"mso {json.dumps(self.__bands)}")
 
 
 def main():
